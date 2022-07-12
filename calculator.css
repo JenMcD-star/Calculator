@@ -1,0 +1,53 @@
+#square {
+    display: grid;
+    margin: auto;
+    border: 10px solid hotpink;
+    background-color: black;
+    aspect-ratio: 1;
+    height: 600px;
+    width: 500px;
+    border-radius: 10px; 
+}
+
+#display {
+    display: grid;
+    background-color: grey;
+    height: 100px;
+    width: 400px;
+    border: 10px solid hotpink;
+    margin: auto;
+    margin-top: 25px;
+    text-align: end;
+    font-size: 100px
+}
+
+#input {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    margin:25px;
+    height: 400px;
+    gap: 10px; 
+}
+
+button {
+ background-color: hotpink;
+ color: black;
+ font-size: larger;
+}
+
+#equals {
+    grid-row: span 2;
+    color: hotpink;
+    background-color: black;
+    border:solid 2px hotpink;
+}
+
+#operator {
+    color: hotpink;
+    background-color: black;
+    border:solid 2px hotpink;
+}
+#zero {
+    grid-column: span 2;
+}
