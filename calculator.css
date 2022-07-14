@@ -36,7 +36,7 @@ button {
  font-size: larger;
 }
 
-#equals {
+.equals {
     grid-row: span 2;
     color: hotpink;
     background-color: black;
@@ -48,6 +48,6 @@ button {
     background-color: black;
     border:solid 2px hotpink;
 }
-#zero {
+.zero {
     grid-column: span 2;
 }

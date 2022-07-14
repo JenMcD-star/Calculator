@@ -1,39 +1,33 @@
-const add = function(x, y) {
-    let result = x + y;
-    return result
-  }
 
-const subtract = function(x,y) {
-    let result = x-y;
-    return result
-}
+let displayValue = '0';
+let firstOperand = null;
+let secondOperand = null;
+let firstOperator = null;
+let secondOperator = null;
+let result = null;
+const buttons = document.querySelectorAll('#input');
+//get value from button click
+//save values
+//display clicked buttons
 
-const sum = function(array) {
-    return array.reduce((total, current) => total + current, 0);
-  };
+   buttons.forEach((input) => {
+    input.addEventListener('click', function() {
+      console.log("yes")
+      
+    });
+   })
   
-const multiply = function(array) {
-      return array.length
-        ? array.reduce((accumulator, nextItem) => accumulator * nextItem)
-        : 0;
-  };
-  
-const divide = function(x, y) {
-    let result = x / y;
-    return result
-}
+ 
 
 const operate = function(operator, x, y) {
     switch(operator) {
      case "+":
-       return add(x,y)
+       return x + y;
      case "-":
-       return subtract(x, y)
+       return x-y;
      case "*":
-       return multiply(x,y)
+       return x*y;
     case "/":
-       return divide(x,y)
-    case "=":
-        return sum
+       return x / y;
     }
 }
