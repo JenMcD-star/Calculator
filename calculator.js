@@ -11,13 +11,12 @@ const buttons = document.querySelectorAll('#input');
 //display clicked buttons
 
    buttons.forEach((input) => {
-    input.addEventListener('click', function() {
-      console.log("yes")
-      
+    input.addEventListener('click', function(event) {   
+    let displayValue = event.target.value
+      document.getElementById("display").innerHTML = displayValue
     });
-   })
-  
- 
+   })   
+   
 
 const operate = function(operator, x, y) {
     switch(operator) {
