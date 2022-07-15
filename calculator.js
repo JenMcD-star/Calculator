@@ -1,7 +1,8 @@
-const buttons = document.querySelectorAll('#input');
+const buttons = document.querySelectorAll('button.number');
+const operatorBtns = document.querySelectorAll('button.operator');
 let displayValue = [];
-let num1 = null;
-let num2 = null;
+let x = null;
+let y = null;
 let operator1 = null;
 let operator2 = null;
 let result = null;
@@ -15,13 +16,24 @@ let result = null;
      console.log(displayValue)
      newValue = +displayValue.join("")
      document.getElementById("display").innerHTML = newValue;
+    
     });
   })   
 
+  operatorBtns.forEach((operator) => {
+    operator.addEventListener('click', function(event) { 
+     document.getElementById("display").innerHTML = '0';
+      displayValue.push(event.target.value)
+     document.getElementById("display").innerHTML = displayValue;
+    });
+  })
+  
 
    
    function clearDisplay() {
-    displayValue = '0';
+    displayValue =[];
+    clearValue = '0';
+    document.getElementById("display").innerHTML = clearValue;
     firstOperand = null;
     secondOperand = null;
     firstOperator = null;
