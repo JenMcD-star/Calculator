@@ -13,22 +13,22 @@
         <div id ="display">0</div>
         <div id ="input">
             <button class="operator" class="backspace">&#9003;</button>
-            <button class="operator">+</button>
-            <button class="operator">-</button>
-            <button class="operator" class="allClear">AC</button>
+            <button class="operator" value="+">+</button>
+            <button class="operator" value="-">-</button>
+            <button class="allClear" onclick="clearDisplay()">AC</button>
             <button class="number"value="9">9</button>
             <button class="number"value="8">8</button>
             <button class="number"value="7">7</button>
-            <button class="operator">/</button>
+            <button class="operator" value="/">/</button>
             <button class="number"value="6">6</button>
             <button class="number"value="5">5</button>
             <button class="number"value="4">4</button>
-            <button class="operator">*</button>
+            <button class="operator" value="*">*</button>
             <button class="number" value="3">3</button>
             <button class="number" value="2">2</button>
             <button class="number" value="1">1</button>
-            <button class="equals">=</button>
-            <button class="zero" value="0">0</button>
+            <button class="equals" onclick = "operate()">=</button>
+            <button class="number" id = "zero" value="0">0</button>
             <button class="number" value=".">.</button>
             
         </div>
