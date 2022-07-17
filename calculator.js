@@ -4,13 +4,9 @@ let displayValue = [];
 let newValue = null;
 let x = null;
 let y = null;
-let operator1 = null;
-let operator2 = null;
+let operator = null;
 let result = null;
-//get value from button click
-//save values
 
-//display clicked buttons
 buttons.forEach((input) => {
   input.addEventListener("click", function (event) {
     displayValue.push(event.target.value);
@@ -18,53 +14,62 @@ buttons.forEach((input) => {
     newValue = +displayValue.join("");
     document.getElementById("display").innerHTML = newValue;
     if (x != null && y === null) {
+      x = firstValue;
       y = newValue;
-      console.log(y);
+      console.log(x, y);
     }
   });
 });
 
-operatorBtns.forEach((operator) => {
-  operator.addEventListener("click", function (event) {
+operatorBtns.forEach((operator1) => {
+  operator1.addEventListener("click", function (event) {
     if (x === null) {
       x = newValue;
       console.log(newValue);
     }
-    if (operator1 === null) {
-      operator1 = this.value;
-      console.log(operator1);
+    if (operator === null) {
+      operator = this.value;
+      console.log(operator);
+    }
+
+    if (x && y) {
+      operate();
     }
     document.getElementById("display").innerHTML = event.target.value;
     displayValue = [];
   });
 });
-//if the first operator is not null then do the operation
+
 function clearDisplay() {
   displayValue = [];
   clearValue = "0";
   document.getElementById("display").innerHTML = clearValue;
-  firstOperand = null;
-  secondOperand = null;
-  firstOperator = null;
-  secondOperator = null;
+  x = null;
+  y = null;
+  operator = null;
   result = null;
 }
-const operate = function (operator, x, y) {
-  switch (operator) {
-    case "+":
-      result = x + y;
-      return result;
-    case "-":
-      result = x - y;
-      return result;
-    case "*":
-      result = x * y;
-      return result;
-    case "/":
-      result = x / y;
-      return result;
+const operate = function (operator, num1, num2) {
+  if (operator === "+") {
+    result = num1 + num2;
+    return result;
+  } else if (operator === "-") {
+    result = num1 - num2;
+    return result;
+  } else if (operator === "*") {
+    result = num1 * num2;
+    return result;
+  } else if (operator === "/") {
+    result = num1 / num2;
+    return result;
   }
-  displayValue = [];
-  totalValue = result;
-  document.getElementById("display").innerHTML = result;
+  console.log('ugh');
+  document.getElementById("display").innerHTML = 'ugh2';
 };
+
+function backspace() {
+  let backValue = displayValue.pop();
+  backValue = +displayValue.join("");
+  newValue = backValue;
+  console.log(newValue);
+}
