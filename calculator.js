@@ -33,9 +33,12 @@ operatorBtns.forEach((operator1) => {
       console.log(x);
     }
     // if there is already a value for both numbers and the operator then operate
-    if (x != null && y != null && operator != null) {
+    if (operator != null) {
       operate(operator, x, y);
     }
+    else if (operator === null && secondOperator != null)
+      operate(secondOperator, x ,y)
+    
     // if the operator doesn't have a value then take the value from the button
     if (operator === null) {
       tempOperator = this.value;
@@ -43,13 +46,15 @@ operatorBtns.forEach((operator1) => {
       console.log(operator);
     // if there is already an operator replace x with result of previous operation and save new operator
     } else if (operator != null){
-      tempOperator = this.value;
-      secondOperator = tempOperator;
+      operator = null;
+      tempTwoOperator = this.value;
+      secondOperator = tempTwoOperator;
       console.log(secondOperator);
       x = result;
       y = null;
-
+      operate(secondOperator, x, y)
     }
+
     document.getElementById("display").innerHTML = event.target.value;
     displayValue = [];
   });
@@ -66,6 +71,8 @@ function clearDisplay() {
 }
 
 const operate = function (op, num1, num2) {
+  if (x === null || y === null){
+  alert('Error')  }
   if (op === "+") {
     result = num1 + num2;
     return result;
@@ -75,16 +82,21 @@ const operate = function (op, num1, num2) {
   } else if (op === "*") {
     result = num1 * num2;
     return result;
-  } else if (op === "/") {
+  } else if (op === "/" && y !=0) {
     result = num1 / num2;
     return result;
+  } else if (op === "/" && y === 0){
+    alert('no can do')
   }
   document.getElementById("display").innerHTML = result;
+  operator = null;
+  secondOperator = null;
   x = result;
   console.log(x);
   y = null;
 };
 
+//removes last item in array, joins array and displays it 
 function backspace() {
   let backValue = displayValue.pop();
   backValue = +displayValue.join("");
