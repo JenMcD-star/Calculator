@@ -2,6 +2,8 @@ const buttons = document.querySelectorAll("button.number");
 const operatorBtns = document.querySelectorAll("button.operator");
 let displayValue = [];
 let newValue = null;
+let firstOperator = null;
+let secondOperator = null;
 let x = null;
 let y = null;
 let operator = null;
@@ -10,31 +12,32 @@ let result = null;
 buttons.forEach((input) => {
   input.addEventListener("click", function (event) {
     displayValue.push(event.target.value);
-    console.log(displayValue);
     newValue = +displayValue.join("");
     document.getElementById("display").innerHTML = newValue;
-    if (x != null && y === null) {
-      x = firstValue;
-      y = newValue;
-      console.log(x, y);
-    }
+    })
   });
-});
 
 operatorBtns.forEach((operator1) => {
   operator1.addEventListener("click", function (event) {
     if (x === null) {
-      x = newValue;
-      console.log(newValue);
+      firstNum = newValue;
+      x = firstNum
+      console.log(x);
+        }    
+    else if (x != null) {
+      secondNum = newValue ;
+      y = secondNum;
+      console.log(y)
     }
+      
     if (operator === null) {
       operator = this.value;
       console.log(operator);
     }
-
-    if (x && y) {
-      operate();
-    }
+    
+  if (x && y) {
+   operate(operator, x, y);
+}
     document.getElementById("display").innerHTML = event.target.value;
     displayValue = [];
   });
@@ -49,6 +52,8 @@ function clearDisplay() {
   operator = null;
   result = null;
 }
+
+const equals = function(){}
 const operate = function (operator, num1, num2) {
   if (operator === "+") {
     result = num1 + num2;
@@ -63,8 +68,8 @@ const operate = function (operator, num1, num2) {
     result = num1 / num2;
     return result;
   }
-  console.log('ugh');
-  document.getElementById("display").innerHTML = 'ugh2';
+  console.log(result);
+  document.getElementById("display").innerHTML = result;
 };
 
 function backspace() {
