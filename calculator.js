@@ -21,6 +21,9 @@ buttons.forEach((input) => {
     if (x != null && y != null && operator != null) {
       operate(operator, x, y);
     }
+    else if (x != null && y != null && secondOperator != null){
+      operate(secondOperator, x, y)
+    }
   });
 });
 
@@ -36,11 +39,9 @@ operatorBtns.forEach((operator1) => {
     if (operator != null) {
       operate(operator, x, y);
     }
-    else if (operator === null && secondOperator != null)
-      operate(secondOperator, x ,y)
-    
+  
     // if the operator doesn't have a value then take the value from the button
-    if (operator === null) {
+    if (operator === null || secondOperator != null) {
       tempOperator = this.value;
       operator = tempOperator;
       console.log(operator);
@@ -71,8 +72,6 @@ function clearDisplay() {
 }
 
 const operate = function (op, num1, num2) {
-  if (x === null || y === null){
-  alert('Error')  }
   if (op === "+") {
     result = num1 + num2;
     return result;
@@ -87,8 +86,10 @@ const operate = function (op, num1, num2) {
     return result;
   } else if (op === "/" && y === 0){
     alert('no can do')
+  } else if (x === null && y === null || operator != null && y === null){
+    alert('error')
   }
-  document.getElementById("display").innerHTML = result;
+  document.getElementById("display").innerHTML = Math.round(result);
   operator = null;
   secondOperator = null;
   x = result;
