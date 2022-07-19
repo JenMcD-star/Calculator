@@ -20,11 +20,9 @@ buttons.forEach((input) => {
     }
     if (x != null && y != null && operator != null) {
       operate(operator, x, y);
-      
-    }
-    else if (x != null && y != null && secondOperator != null){
+    } else if (x != null && y != null && secondOperator != null) {
       operate(secondOperator, x, y);
-      displayResult()
+      updateResult()
     }
   });
 });
@@ -37,25 +35,22 @@ operatorBtns.forEach((operator1) => {
       x = firstNum;
       console.log(x);
     }
-    //this could be the problem- two if op != condition
-  // if an operator is already used, store the second operator
-    if (operator != null){
+    // if an operator is already used, store the second operator
+    if (operator != null) {
       operator = null;
       tempTwoOperator = this.value;
       secondOperator = tempTwoOperator;
       console.log(secondOperator);
       x = result;
       y = null;
-      operate(secondOperator, x, y)
-      
-      
-    } 
+      operate(secondOperator, x, y);
+    }
     // if the operator doesn't have a value then take the value from the button
     else if (operator === null) {
       tempOperator = this.value;
       operator = tempOperator;
       console.log(operator);
-    } 
+    }
 
     document.getElementById("display").innerHTML = event.target.value;
     displayValue = [];
@@ -82,28 +77,26 @@ const operate = function (op, num1, num2) {
   } else if (op === "*") {
     result = num1 * num2;
     return result;
-  } else if (op === "/" && y !=0) {
+  } else if (op === "/" && y != 0) {
     result = num1 / num2;
     return result;
-  } else if (op === "/" && y === 0){
-    alert('no can do')
-  } else if (x === null && y === null || operator != null && y === null){
-    alert('error')
+  } else if (op === "/" && y === 0) {
+    alert("no can do");
+  } else if ((x === null && y === null) || (operator != null && y === null)) {
+    alert("error");
   }
-  displayResult()
+  document.getElementById("display").innerHTML = Math.round(result);
+  updateResult();
 };
 
-function displayResult(){
-  document.getElementById("display").innerHTML = Math.round(result);
+function updateResult() {
   operator = null;
   secondOperator = null;
   x = result;
   console.log(x);
   y = null;
-};
-
-
-//removes last item in array, joins array and displays it 
+}
+//removes last item in array, joins array and displays it
 function backspace() {
   let backValue = displayValue.pop();
   backValue = +displayValue.join("");
