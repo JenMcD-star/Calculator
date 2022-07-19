@@ -20,9 +20,11 @@ buttons.forEach((input) => {
     }
     if (x != null && y != null && operator != null) {
       operate(operator, x, y);
+      
     }
     else if (x != null && y != null && secondOperator != null){
-      operate(secondOperator, x, y)
+      operate(secondOperator, x, y);
+      displayResult()
     }
   });
 });
@@ -35,18 +37,9 @@ operatorBtns.forEach((operator1) => {
       x = firstNum;
       console.log(x);
     }
-    // if there is already a value for both numbers and the operator then operate
-    if (operator != null) {
-      operate(operator, x, y);
-    }
-  
-    // if the operator doesn't have a value then take the value from the button
-    if (operator === null || secondOperator != null) {
-      tempOperator = this.value;
-      operator = tempOperator;
-      console.log(operator);
-    // if there is already an operator replace x with result of previous operation and save new operator
-    } else if (operator != null){
+    //this could be the problem- two if op != condition
+  // if an operator is already used, store the second operator
+    if (operator != null){
       operator = null;
       tempTwoOperator = this.value;
       secondOperator = tempTwoOperator;
@@ -54,7 +47,15 @@ operatorBtns.forEach((operator1) => {
       x = result;
       y = null;
       operate(secondOperator, x, y)
-    }
+      
+      
+    } 
+    // if the operator doesn't have a value then take the value from the button
+    else if (operator === null) {
+      tempOperator = this.value;
+      operator = tempOperator;
+      console.log(operator);
+    } 
 
     document.getElementById("display").innerHTML = event.target.value;
     displayValue = [];
@@ -89,6 +90,10 @@ const operate = function (op, num1, num2) {
   } else if (x === null && y === null || operator != null && y === null){
     alert('error')
   }
+  displayResult()
+};
+
+function displayResult(){
   document.getElementById("display").innerHTML = Math.round(result);
   operator = null;
   secondOperator = null;
@@ -96,6 +101,7 @@ const operate = function (op, num1, num2) {
   console.log(x);
   y = null;
 };
+
 
 //removes last item in array, joins array and displays it 
 function backspace() {
