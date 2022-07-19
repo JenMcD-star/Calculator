@@ -13,19 +13,34 @@ buttons.forEach((input) => {
     displayValue.push(event.target.value);
     newValue = +displayValue.join("");
     document.getElementById("display").innerHTML = newValue;
-    if (x != null) {
-      secondNum = newValue;
-      y = secondNum;
-      console.log(y);
-    }
-    if (x != null && y != null && operator != null) {
-      operate(operator, x, y);
-    } else if (x != null && y != null && secondOperator != null) {
-      operate(secondOperator, x, y);
-      updateResult()
-    }
+    getInfo();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    displayValue.push(event.target.value);
+    newValue = +displayValue.join("");
+    document.getElementById("display").innerHTML = newValue;
+    getInfo();
   });
 });
+
+function getInfo() {
+  //assigns second input to a variable if the first already has a value
+  if (x != null) {
+    secondNum = newValue;
+    y = secondNum;
+    console.log(y);
+  }
+  //operate() when the x, y, and operator variables have a value
+  if (x != null && y != null && operator != null) {
+    operate(operator, x, y);
+
+    //operate() when the x, y, and second operator variables have a value
+  } else if (x != null && y != null && secondOperator != null) {
+    operate(secondOperator, x, y);
+    updateResult();
+  }
+}
 
 operatorBtns.forEach((operator1) => {
   operator1.addEventListener("click", function (event) {
@@ -35,7 +50,7 @@ operatorBtns.forEach((operator1) => {
       x = firstNum;
       console.log(x);
     }
-    // if an operator is already used, store the second operator
+    // if an operator is already used, store the second operator and then use in operate()
     if (operator != null) {
       operator = null;
       tempTwoOperator = this.value;
@@ -51,7 +66,7 @@ operatorBtns.forEach((operator1) => {
       operator = tempOperator;
       console.log(operator);
     }
-
+    // display operator
     document.getElementById("display").innerHTML = event.target.value;
     displayValue = [];
   });
@@ -66,7 +81,7 @@ function clearDisplay() {
   operator = null;
   result = null;
 }
-
+//takes the variables and shows final result
 const operate = function (op, num1, num2) {
   if (op === "+") {
     result = num1 + num2;
@@ -82,13 +97,11 @@ const operate = function (op, num1, num2) {
     return result;
   } else if (op === "/" && y === 0) {
     alert("no can do");
-  } else if ((x === null && y === null) || (operator != null && y === null)) {
-    alert("error");
   }
   document.getElementById("display").innerHTML = Math.round(result);
   updateResult();
 };
-
+//updates the result when multiple operators are used in a row and resets other variables
 function updateResult() {
   operator = null;
   secondOperator = null;
@@ -97,9 +110,23 @@ function updateResult() {
   y = null;
 }
 //removes last item in array, joins array and displays it
+//if === nan display... else this same code
 function backspace() {
   let backValue = displayValue.pop();
-  backValue = +displayValue.join("");
-  newValue = backValue;
-  document.getElementById("display").innerHTML = newValue;
+  //if the backValue is an operator, display the previous variable
+  if (backValue === undefined && x != null && y === null) {
+    operator = null;
+    document.getElementById("display").innerHTML = x;
+  }
+  //or if there is already two variables and an operator display the result
+  else if (backValue === undefined && x != null && y != null) {
+    document.getElementById("display").innerHTML = y;
+  }
+  //removes last item in array, joins array and displays it
+  else {
+    backValue = +displayValue.join("");
+    newValue = backValue;
+    document.getElementById("display").innerHTML = newValue;
+  }
 }
+//figure out how to limit input? or limit display
