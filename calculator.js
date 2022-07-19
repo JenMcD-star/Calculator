@@ -19,13 +19,16 @@ buttons.forEach((input) => {
 
     getInfo();
   });
+});
 
-  document.addEventListener("keydown", (event) => {
-    displayValue.push(event.target.value);
-    newValue = +displayValue.join("");
-    document.getElementById("display").innerHTML = newValue;
-    getInfo();
-  });
+window.addEventListener("keydown", (event) => {
+  displayValue.push(event.key);
+  if (displayValue.length > 8) {
+    displayValue.length = 8;
+  }
+  newValue = +displayValue.join("");
+  document.getElementById("display").innerHTML = newValue;
+  getInfo();
 });
 
 function getInfo() {
