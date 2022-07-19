@@ -11,8 +11,12 @@ let result = null;
 buttons.forEach((input) => {
   input.addEventListener("click", function (event) {
     displayValue.push(event.target.value);
+    if (displayValue.length > 8) {
+      displayValue.length = 8;
+    }
     newValue = +displayValue.join("");
     document.getElementById("display").innerHTML = newValue;
+
     getInfo();
   });
 
@@ -98,7 +102,7 @@ const operate = function (op, num1, num2) {
   } else if (op === "/" && y === 0) {
     alert("no can do");
   }
-  document.getElementById("display").innerHTML = Math.round(result);
+  document.getElementById("display").innerHTML = result.toPrecision(3);
   updateResult();
 };
 //updates the result when multiple operators are used in a row and resets other variables
@@ -110,7 +114,6 @@ function updateResult() {
   y = null;
 }
 //removes last item in array, joins array and displays it
-//if === nan display... else this same code
 function backspace() {
   let backValue = displayValue.pop();
   //if the backValue is an operator, display the previous variable
@@ -118,7 +121,7 @@ function backspace() {
     operator = null;
     document.getElementById("display").innerHTML = x;
   }
-  //or if there is already two variables and an operator display the result
+  //or if there are already two variables and an operator then backspace will display the result
   else if (backValue === undefined && x != null && y != null) {
     document.getElementById("display").innerHTML = y;
   }
@@ -129,4 +132,3 @@ function backspace() {
     document.getElementById("display").innerHTML = newValue;
   }
 }
-//figure out how to limit input? or limit display
