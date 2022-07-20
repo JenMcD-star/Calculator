@@ -11,28 +11,22 @@ let result = null;
 buttons.forEach((input) => {
   input.addEventListener("click", function (event) {
     displayValue.push(event.target.value);
-    if (displayValue.length > 8) {
-      displayValue.length = 8;
-    }
-    newValue = +displayValue.join("");
-    document.getElementById("display").innerHTML = newValue;
-
-    getInfo();
+  limitDisplay()
   });
 });
 
 window.addEventListener("keydown", (event) => {
+  if (isNaN(event.key)){
+    return
+  } else {
   displayValue.push(event.key);
-  if (displayValue.length > 8) {
-    displayValue.length = 8;
+  limitDisplay()
   }
-  newValue = +displayValue.join("");
-  document.getElementById("display").innerHTML = newValue;
-  getInfo();
 });
 
 function getInfo() {
   //assigns second input to a variable if the first already has a value
+
   if (x != null) {
     secondNum = newValue;
     y = secondNum;
@@ -88,7 +82,7 @@ function clearDisplay() {
   operator = null;
   result = null;
 }
-//takes the variables and shows final result
+//takes the variables and shows result
 const operate = function (op, num1, num2) {
   if (op === "+") {
     result = num1 + num2;
@@ -134,4 +128,12 @@ function backspace() {
     newValue = backValue;
     document.getElementById("display").innerHTML = newValue;
   }
+}
+function limitDisplay(){
+  if (displayValue.length > 8) {
+    displayValue.length = 8;
+  }
+  newValue = +displayValue.join("");
+  document.getElementById("display").innerHTML = newValue;
+  getInfo();
 }
